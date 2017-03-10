@@ -59,6 +59,8 @@
             android:layout_marginLeft="-3dp"
             android:layout_marginRight="-3dp"
             android:rating="2.5"
+            app:mrb_star_border_icon="@drawable/star_border_icon_black_36dp"
+            app:mrb_star_icon="@drawable/star_icon_black_36dp"
             style="@style/Widget.MaterialRatingBar.RatingBar" />
 
         <TextView

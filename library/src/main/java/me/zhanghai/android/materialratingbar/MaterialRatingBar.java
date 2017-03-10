@@ -12,16 +12,17 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.RatingBar;
 
 import me.zhanghai.android.materialratingbar.internal.DrawableCompat;
 
-public class MaterialRatingBar extends RatingBar {
+public class MaterialRatingBar extends AppCompatRatingBar {
 
     private static final String TAG = MaterialRatingBar.class.getSimpleName();
 
@@ -95,9 +96,19 @@ public class MaterialRatingBar extends RatingBar {
                     R.styleable.MaterialRatingBar_mrb_indeterminateTintMode, -1), null);
             mProgressTintInfo.mHasIndeterminateTintMode = true;
         }
+        @DrawableRes int starBorderIconIdRes = -1;
+        if (a.hasValue(R.styleable.MaterialRatingBar_mrb_star_border_icon)) {
+            starBorderIconIdRes = a.getResourceId(
+                    R.styleable.MaterialRatingBar_mrb_star_border_icon, -1);
+        }
+        @DrawableRes int starIconIdRes = 0;
+        if (a.hasValue(R.styleable.MaterialRatingBar_mrb_star_icon)) {
+            starIconIdRes = a.getResourceId(
+                    R.styleable.MaterialRatingBar_mrb_star_icon, -1);
+        }
         a.recycle();
 
-        mDrawable = new MaterialRatingDrawable(getContext());
+        mDrawable = new MaterialRatingDrawable(getContext(), starBorderIconIdRes, starIconIdRes);
         mDrawable.setStarCount(getNumStars());
         setProgressDrawable(mDrawable);
     }
@@ -475,7 +486,7 @@ public class MaterialRatingBar extends RatingBar {
          * {@link OnRatingBarChangeListener}.
          *
          * @param ratingBar The RatingBar whose rating has changed.
-         * @param rating The current rating. This will be in the range 0..numStars.
+         * @param rating    The current rating. This will be in the range 0..numStars.
          */
         void onRatingChanged(MaterialRatingBar ratingBar, float rating);
     }

@@ -43,5 +43,7 @@
             <enum name="screen" value="15" />
             <enum name="add" value="16" />
         </attr>
+        <attr name="mrb_star_border_icon" format="reference" />
+        <attr name="mrb_star_icon" format="reference" />
     </declare-styleable>
 </resources>

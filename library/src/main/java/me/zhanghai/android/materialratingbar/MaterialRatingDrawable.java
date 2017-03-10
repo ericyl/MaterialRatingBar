@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.annotation.DrawableRes;
 import android.support.v7.content.res.AppCompatResources;
 import android.view.Gravity;
 
@@ -17,11 +18,16 @@ import me.zhanghai.android.materialratingbar.internal.ThemeUtils;
 public class MaterialRatingDrawable extends LayerDrawable {
 
     public MaterialRatingDrawable(Context context) {
-        super(new Drawable[] {
-                createLayerDrawable(R.drawable.mrb_star_border_icon_black_36dp, false, context),
-                createClippedLayerDrawable(R.drawable.mrb_star_border_icon_black_36dp, true,
+        this(context, -1, -1);
+    }
+
+    public MaterialRatingDrawable(Context context, @DrawableRes int starBorderIconIdRes, @DrawableRes int starIconIdRes) {
+
+        super(new Drawable[]{
+                createLayerDrawable((starBorderIconIdRes == -1) ? R.drawable.mrb_star_border_icon_black_36dp : starBorderIconIdRes, false, context),
+                createClippedLayerDrawable((starBorderIconIdRes == -1) ? R.drawable.mrb_star_border_icon_black_36dp : starBorderIconIdRes, true,
                         context),
-                createClippedLayerDrawable(R.drawable.mrb_star_icon_black_36dp, true, context)
+                createClippedLayerDrawable((starIconIdRes == -1) ? R.drawable.mrb_star_icon_black_36dp : starIconIdRes, true, context)
         });
 
         setId(0, android.R.id.background);
